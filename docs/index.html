@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8-Bit Computer — Documentation</title>
+  <meta name="description" content="Full documentation for a custom 8-bit breadboard computer built from discrete 74LS-series TTL logic ICs.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🖥️</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────────────── */
+    :root {
+      --bg-base:        #0a0c0f;
+      --bg-surface:     #11141a;
+      --bg-raised:      #181c24;
+      --bg-overlay:     #1f2430;
+      --border:         #2a3040;
+      --border-accent:  #3d4f6e;
+
+      --text-primary:   #e8edf5;
+      --text-secondary: #8a9ab8;
+      --text-muted:     #4a5568;
+
+      --accent:         #4a9eff;
+      --accent-glow:    rgba(74, 158, 255, 0.15);
+      --accent-warm:    #ff6b35;
+      --accent-green:   #39d353;
+
+      --font-display:   'Syne', sans-serif;
+      --font-mono:      'JetBrains Mono', monospace;
+
+      --sidebar-w:      280px;
+      --radius:         6px;
+      --transition:     0.2s ease;
+    }
+
+    /* ── Reset & Base ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 14px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────────────────── */
+    .sidebar {
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      width: var(--sidebar-w);
+      padding: 0;
+      overflow-y: auto;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+    }
+
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border-accent); border-radius: 2px; }
+
+    .sidebar .sidebar-nav { padding: 0 0 2rem; }
+
+    /* Sidebar logo/header */
+    .app-name {
+      display: block;
+      padding: 1.5rem 1.25rem 1rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+      text-decoration: none !important;
+    }
+
+    .app-name-link {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-primary) !important;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      display: block;
+    }
+
+    .app-name-link::before {
+      content: '⬡';
+      color: var(--accent);
+      margin-right: 0.5rem;
+      font-size: 0.9em;
+    }
+
+    .app-name-link small {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.2rem;
+    }
+
+    /* Sidebar nav links */
+    .sidebar-nav ul { list-style: none; padding: 0 0.75rem; }
+
+    .sidebar-nav li > a,
+    .sidebar-nav p {
+      display: block;
+      padding: 0.35rem 0.6rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      font-weight: 400;
+      transition: background var(--transition), color var(--transition);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sidebar-nav p {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 1rem 0.6rem 0.25rem;
+      cursor: default;
+    }
+
+    .sidebar-nav li > a:hover {
+      background: var(--bg-raised);
+      color: var(--text-primary);
+    }
+
+    .sidebar-nav li.active > a,
+    .sidebar-nav li > a.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-left: 2px solid var(--accent);
+      padding-left: calc(0.6rem - 2px);
+    }
+
+    /* ── Content ───────────────────────────────────────────────────────── */
+    .content {
+      margin-left: var(--sidebar-w);
+      padding: 3rem 4rem;
+      max-width: calc(var(--sidebar-w) + 860px);
+    }
+
+    /* ── Markdown Typography ───────────────────────────────────────────── */
+    .markdown-section {
+      max-width: 760px;
+    }
+
+    .markdown-section h1 {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1.15;
+      margin: 0 0 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .markdown-section h2 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 2.5rem 0 0.75rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+      letter-spacing: -0.02em;
+    }
+
+    .markdown-section h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 1.75rem 0 0.5rem;
+    }
+
+    .markdown-section h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin: 1.25rem 0 0.4rem;
+    }
+
+    .markdown-section p {
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      line-height: 1.8;
+    }
+
+    .markdown-section strong { color: var(--text-primary); font-weight: 600; }
+    .markdown-section em { color: var(--accent); font-style: normal; }
+
+    /* Links */
+    .markdown-section a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition);
+    }
+    .markdown-section a:hover { border-bottom-color: var(--accent); }
+
+    /* Code */
+    .markdown-section code {
+      font-family: var(--font-mono);
+      font-size: 0.82em;
+      background: var(--bg-raised);
+      color: var(--accent-warm);
+      padding: 0.15em 0.45em;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    .markdown-section pre {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.25rem 0;
+      position: relative;
+    }
+
+    .markdown-section pre::before {
+      content: attr(data-lang);
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .markdown-section pre code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--text-secondary);
+      font-size: 0.82rem;
+      line-height: 1.65;
+    }
+
+    /* Tables */
+    .markdown-section table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.82rem;
+    }
+
+    .markdown-section table th {
+      background: var(--bg-raised);
+      color: var(--text-primary);
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 0.85rem;
+      border-bottom: 1px solid var(--border-accent);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .markdown-section table td {
+      padding: 0.55rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+      vertical-align: top;
+    }
+
+    .markdown-section table tr:hover td { background: var(--bg-surface); }
+
+    /* Blockquotes */
+    .markdown-section blockquote {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-glow);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin: 1.25rem 0;
+    }
+
+    .markdown-section blockquote p {
+      margin: 0;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+    }
+
+    /* Lists */
+    .markdown-section ul, .markdown-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .markdown-section li { margin-bottom: 0.3rem; }
+    .markdown-section li::marker { color: var(--accent); }
+
+    /* Horizontal rule */
+    .markdown-section hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2rem 0;
+    }
+
+    /* Images */
+    .markdown-section img {
+      max-width: 100%;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+
+    /* ── Search ────────────────────────────────────────────────────────── */
+    .search { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+
+    .search input {
+      width: 100%;
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      padding: 0.45rem 0.75rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .search input:focus { border-color: var(--accent); }
+    .search input::placeholder { color: var(--text-muted); }
+
+    /* ── Progress bar ──────────────────────────────────────────────────── */
+    #nprogress .bar { background: var(--accent); height: 2px; }
+    #nprogress .peg { box-shadow: 0 0 10px var(--accent), 0 0 5px var(--accent); }
+
+    /* ── Cover page ────────────────────────────────────────────────────── */
+    section.cover {
+      background: var(--bg-base) !important;
+      background-image:
+        radial-gradient(ellipse 60% 40% at 70% 30%, rgba(74,158,255,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(255,107,53,0.05) 0%, transparent 70%) !important;
+    }
+
+    section.cover .cover-main { color: var(--text-primary); }
+
+    section.cover h1 {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--text-primary);
+    }
+
+    section.cover h1 span { color: var(--accent); }
+
+    section.cover p { color: var(--text-secondary); font-size: 1rem; }
+
+    section.cover a.anchor {
+      background: var(--accent);
+      color: #000;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: opacity var(--transition);
+    }
+
+    section.cover a.anchor:hover { opacity: 0.85; }
+
+    /* ── Syntax highlighting (manual) ──────────────────────────────────── */
+    .token.comment { color: #4a5568; }
+    .token.keyword { color: #c792ea; }
+    .token.string  { color: #a5d6a7; }
+    .token.number  { color: var(--accent-warm); }
+    .token.function{ color: var(--accent); }
+
+    /* ── Responsive ────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .content { margin-left: 0; padding: 1.5rem; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s; z-index: 100; }
+      .sidebar.open { transform: translateX(0); }
+    }
+
+    /* ── Chip badge component (use in markdown via raw HTML) ───────────── */
+    .chip {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.15em 0.6em;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+    .chip-blue  { color: var(--accent);       border-color: var(--accent);       background: rgba(74,158,255,0.1); }
+    .chip-green { color: var(--accent-green);  border-color: var(--accent-green); background: rgba(57,211,83,0.1); }
+    .chip-orange{ color: var(--accent-warm);   border-color: var(--accent-warm);  background: rgba(255,107,53,0.1); }
+    .chip-gray  { color: var(--text-muted);    border-color: var(--border);       background: var(--bg-raised); }
+  </style>
+</head>
+
+<body>
+  <div id="app">Loading documentation...</div>
+
+  <script>
+    window.$docsify = {
+      name: '<span class="app-name-link">8-Bit Computer<small>SAP-1 Architecture</small></span>',
+      nameLink: '/',
+      repo: 'https://github.com/yourusername/8-bit-computer',
+      loadSidebar: true,
+      subMaxLevel: 2,
+      auto2top: true,
+      coverpage: true,
+      onlyCover: false,
+      search: {
+        placeholder: 'Search docs...',
+        noData: 'No results.',
+        depth: 6,
+      },
+      pagination: {
+        previousText: '← Previous',
+        nextText: 'Next →',
+        crossChapter: true,
+      },
+      plugins: [
+        function(hook) {
+          hook.beforeEach(function(content) {
+            return content;
+          });
+          hook.doneEach(function() {
+            // Add data-lang attribute to code blocks for the CSS ::before label
+            document.querySelectorAll('pre[data-lang]').forEach(function(pre) {
+              // already set by docsify
+            });
+          });
+        }
+      ]
+    };
+  </script>
+
+  <!-- Docsify core -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+
+  <!-- Syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+
+</body>
+</html>
