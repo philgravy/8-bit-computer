@@ -38,6 +38,8 @@ There is no hands-on hardware platform in the current UTC EE curriculum that all
 
 This project addresses all three gaps directly: by constructing a fully functional 8-bit computer from discrete 74LS TTL logic, the team makes every architectural concept physically tangible. By adding an STM32-driven visualization system monitoring 71 signals in real time, the computer becomes its own debugging instrument — something no existing SAP-1 implementation offers.
 
+## High-level Overview
+
 | Spec | Value |
 |---|---|
 | Data bus width | 8 bits |
