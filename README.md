@@ -127,8 +127,15 @@ UPDATE IT
 | CLK | Clock | Provides timing signals to synchronize system operations. |
 
 ---
+## Contact Info
 
+Philip Segraves : philipsegraves121@gmail.com
+Andrew Adams : andrew.b.a@gmail.com
+Braylon Nix : braylonnix@gmail.com
+
+---
 ## References
+
 
 - [Ben Eater's 8-bit Computer Series](https://eater.net/8bit)
 - [74LS173 Datasheet](https://www.ti.com/lit/ds/symlink/sn74ls173a.pdf)
