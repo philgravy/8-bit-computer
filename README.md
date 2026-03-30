@@ -39,21 +39,7 @@ This project implements a custom 8-bit CPU entirely from TTL logic on breadboard
 
 ## Architecture
 
-```
-          ┌─────────────────────────────────────────┐
-          │               8-bit BUS                 │
-          └──┬──────┬──────┬──────┬──────┬──────────┘
-             │      │      │      │      │
-           [REG A] [REG B] [IR]  [MAR]  [OUT]
-             │      │      │      │
-            [ALU]        [ROM]  [RAM]
-             │              │
-           [FLAGS]        [PC]
-                            │
-                    [Control Logic]
-                    (EEPROM Microcode)
-```
-
+(Architecture_Outdated.pdf)
 ---
 
 ## Modules
