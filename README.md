@@ -114,7 +114,6 @@ See [`firmware/eeprom/`](./firmware/eeprom/) for the EEPROM programmer code and 
 - [Ben Eater's 8-bit Computer Series](https://eater.net/8bit)
 - [74LS173 Datasheet](https://www.ti.com/lit/ds/symlink/sn74ls173a.pdf)
 - [AT28C16 EEPROM Datasheet](https://ww1.microchip.com/downloads/en/DeviceDoc/doc0540.pdf)
-- [James Bates' Extended ISA](https://github.com/jamesbates/8bit)
 
 ---
 
