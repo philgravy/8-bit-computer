@@ -112,6 +112,24 @@ See [`firmware/eeprom/`](./firmware/eeprom/) for the EEPROM programmer code and 
 
 ---
 
+## Architecture Terms
+
+| Acronym | Meaning | Description |
+|--------|--------|------------|
+| SAP | Simple-As-Possible Computer | A minimal educational computer architecture demonstrating basic CPU operation and the fetch–decode–execute cycle. |
+| ALU | Arithmetic Logic Unit | Performs arithmetic and logical operations on data from registers. |
+| MAR | Memory Address Register | Holds the address of the memory location being accessed. |
+| RAM | Random Access Memory | Stores program instructions and data. |
+| PC | Program Counter | Holds the address of the next instruction to be executed. |
+| IR | Instruction Register | Stores the current instruction being executed. |
+| CU | Control Unit | Generates control signals to coordinate CPU operations; implemented via microcode in EEPROM. |
+| EEPROM | Electrically Erasable Programmable Read-Only Memory | Stores microcode that defines control logic behavior. |
+| Bus | System Bus | Shared data pathway connecting registers, ALU, and memory. |
+| CLK | Clock | Provides timing signals to synchronize system operations. |
+| Reg | Register | Small, fast storage unit used to hold intermediate data within the CPU. |
+
+---
+
 ## References
 
 - [Ben Eater's 8-bit Computer Series](https://eater.net/8bit)
