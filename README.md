@@ -98,7 +98,22 @@ UPDATE IT
 ```
 
 ---
+## Bill of Materials
 
+| # | Item | Vendor | Qty | Unit Price | Extended |
+|---|------|--------|-----|-----------|----------|
+| 1 | Complete 8-bit Breadboard Computer Kit Bundle (Clock, Registers/ALU, RAM/PC, Output/Control) | [eater.net](https://eater.net) | 1 | $329.96 | $329.96 |
+| 2 | STM32F411CEU6 Development Board (Black Pill) | Amazon | 1 | $15.99 | $15.99 |
+| 3 | SN74HC165 8-Bit Shift Registers, DIP-16 (20-pack) | Amazon | 1 | $8.99 | $8.99 |
+| 4 | 4.0" TFT SPI LCD Display, ST7796S, 480x320 | Amazon | 1 | $19.99 | $19.99 |
+| 5 | ST-Link V2 STM32/STM8 Programmer | Amazon | 1 | $9.99 | $9.99 |
+| 6 | T48 EEPROM Programmer | [eater.net](https://eater.net) | 1 | $79.99 | $79.99 |
+| 7 | LED Yellow Diffused T-1 3/4 (WP7113YD5V) | DigiKey | 16 | $0.31 | $4.96 |
+| 8 | LED Red Diffused T-1 3/4 (WP7113ID5V) | DigiKey | 24 | $0.39 | $9.26 |
+| 9 | LED Green Diffused T-1 3/4 (WP7113SGD5V) | DigiKey | 16 | $0.39 | $6.18 |
+| 10 | DigiKey Shipping + Tariff | DigiKey | — | — | $15.09 |
+| | | | | **Total** | **$500.40** |
+---
 ## Build Log
 
 | Date | Milestone |
