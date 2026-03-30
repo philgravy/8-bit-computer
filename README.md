@@ -8,7 +8,7 @@
 ![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
 
 **A fully functional 8-bit computer built from discrete 74LS-series logic ICs on breadboards.**  
-Inspired by Ben Eater's SAP-1 architecture, extended with custom control logic, EEPROM-based microcode, and STM32-driven real-time visualization.
+Inspired by Ben Eater's SAP-1 architecture, extended with STM32 real-time visualization.
 
 [📖 Full Documentation](https://yourusername.github.io/8-bit-computer) · [🔌 Schematics](./schematics/) · [💾 Firmware](./firmware/) · [📋 BOM](./hardware/BOM.md)
 
