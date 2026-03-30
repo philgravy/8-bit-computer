@@ -179,6 +179,6 @@ Same pattern as `JC` but gated on the zero flag bit in the EEPROM address.
 
 ---
 
-## EEPROM Programmer
+## Microcode Overview
 
-See [EEPROM Programmer](eeprom-programmer.md) for the Arduino sketch that generates and burns this table.
+See [Microcode Overview](Microcode Overview.md) to see how this is implemented.
