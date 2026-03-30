@@ -39,7 +39,7 @@ This project implements a custom 8-bit CPU entirely from TTL logic on breadboard
 
 ## Architecture
 
-! [Computer Architecture](Architecture_Outdated.pdf)
+![Computer Architecture](Architecture_Outdated.jpg)
 ---
 
 ## Modules
