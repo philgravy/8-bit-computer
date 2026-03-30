@@ -14,8 +14,7 @@ Inspired by Ben Eater's SAP-1 architecture, extended with custom control logic, 
 
 ---
 
-<!-- Replace with an actual photo or GIF of your build -->
-![Build Photo](docs/assets/images/build-placeholder.png)
+<img src="https://github.com/user-attachments/assets/20b6e02a-6d24-4301-82a8-a23c3fe94a1b" alt="Image" width="400">
 
 </div>
 
