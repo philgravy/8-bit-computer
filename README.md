@@ -129,9 +129,10 @@ UPDATE IT
 ---
 ## Contact Info
 
+
 Philip Segraves : philipsegraves121@gmail.com
-Andrew Adams : andrew.b.a@gmail.com
-Braylon Nix : braylonnix@gmail.com
+Andrew Adams : andrew.b.a.2003@gmail.com
+Braylon Nix : brs279@mocs.utc.edu
 
 ---
 ## References
