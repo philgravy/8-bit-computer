@@ -10,7 +10,7 @@
 **A fully functional 8-bit computer built from discrete 74LS-series logic ICs on breadboards.**  
 Inspired by Ben Eater's SAP-1 architecture, extended with STM32-driven real-time visualization.
 
-[📖 Full Documentation](.docs/fulldocumenation) · [🔌 Schematics](./docs/schematics/) · [💾 Firmware](./firmware/) · [📋 BOM](./hardware/BOM.md)
+[📖 Full Documentation](.docs/Full_Documenation) · [🔌 Schematics](./docs/schematics/) · [💾 Firmware](./firmware/) · [📋 BOM](./hardware/BOM.md)
 
 ---
 
