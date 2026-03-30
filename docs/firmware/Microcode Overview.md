@@ -1,10 +1,10 @@
-# Microcode EEPROM
+# Microcode Overview
 
 The microcode is stored in two **AT28C16** EEPROMs and programmed via two custom .bin files produced from `microcode.c`. This page covers how the programmer works, the code structure, and how to modify/reprogram the microcode.
 
 ---
 
-## Overview
+## Summary
 
 The control logic requires two EEPROMs since each microcode control word is 16 bits wide, but the AT28C16 only outputs 8 bits at a time. One EEPROM stores the high byte of each control word, the other stores the low byte. Both chips are addressed identically,and the same address lines feed both simultaneously. Their outputs are combined to form the full 16-bit control word on every clock cycle.
 
