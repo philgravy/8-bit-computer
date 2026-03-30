@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design & Testing | 8-Bit Breadboard Computer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-header { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  section { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .body-text p { color: var(--text-dim); margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
+  .body-text p strong { color: var(--text); font-weight: 600; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 2rem; margin-top: 1.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .tl-item { position: relative; padding-bottom: 2.5rem; }
+  .tl-item::before { content: ''; position: absolute; left: -2rem; top: 0.35rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); transform: translateX(-3.5px); }
+  .tl-item.wip::before { background: #ffd700; box-shadow: 0 0 8px #ffd700; }
+  .tl-item.pending::before { background: var(--text-dim); box-shadow: none; }
+  .tl-date { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+  .tl-item.wip .tl-date { color: #ffd700; }
+  .tl-item.pending .tl-date { color: var(--text-dim); }
+  .tl-item h4 { font-family: var(--display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .tl-item p { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; }
+
+  /* Photo grid */
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1rem; margin-top: 1.5rem; }
+  .photo-slot { aspect-ratio: 4/3; background: var(--surface); border: 1px dashed var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-dim); font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Test table */
+  .test-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; }
+  .test-table th { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); text-align: left; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+  .test-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 300; }
+  .test-table tr:hover td { background: var(--surface); }
+  .test-table td:first-child { color: var(--text); font-weight: 600; }
+  .pass { color: var(--accent) !important; font-family: var(--mono); font-size: 0.78rem; }
+  .wip-status { color: #ffd700 !important; font-family: var(--mono); font-size: 0.78rem; }
+  .fail { color: var(--warn) !important; font-family: var(--mono); font-size: 0.78rem; }
+
+  /* Design objectives */
+  .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .obj-card { background: var(--surface); padding: 1.25rem 1.5rem; }
+  .obj-num { font-family: var(--display); font-size: 2rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 0.5rem; }
+  .obj-card h4 { font-family: var(--display); font-size: 1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .obj-card p { font-size: 0.85rem; color: var(--text-dim); font-weight: 300; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">8BIT.COMPUTER // ENEE4850</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="background.html">Background</a></li>
+    <li><a href="design.html" class="active">Design</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="section-label">Design, Testing &amp; Results</div>
+    <div class="section-title">Building the Machine</div>
+  </div>
+
+  <section>
+    <div class="section-label">01 — Design Objectives</div>
+    <div class="section-title" style="font-size:1.8rem;">What We Set Out to Build</div>
+    <div class="obj-grid">
+      <div class="obj-card"><div class="obj-num">01</div><h4>Functional CPU</h4><p>Execute a complete fetch-decode-execute cycle using real TTL logic, no FPGAs or simulation.</p></div>
+      <div class="obj-card"><div class="obj-num">02</div><h4>EEPROM Microcode</h4><p>All instruction behavior defined by programmable ROM, allowing instruction set modification without hardware changes.</p></div>
+      <div class="obj-card"><div class="obj-num">03</div><h4>Real-Time Visibility</h4><p>Monitor 71 internal signals simultaneously to observe bus state every clock cycle — the computer's own debugger.</p></div>
+      <div class="obj-card"><div class="obj-num">04</div><h4>Variable Clock</h4><p>Support single-step manual mode through full-speed operation, enabling step-by-step instruction tracing.</p></div>
+      <div class="obj-card"><div class="obj-num">05</div><h4>Full Documentation</h4><p>Complete schematics, firmware, BOM, and test procedures published openly for reproducibility.</p></div>
+      <div class="obj-card"><div class="obj-num">06</div><h4>Educational Platform</h4><p>Serve as a tangible demonstration of computer architecture concepts from the gate level up.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">02 — Design Process</div>
+    <div class="section-title" style="font-size:1.8rem;">Progress Timeline</div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Fall 2025 — Project Kickoff</div>
+        <h4>Team Formation &amp; Architecture Selection</h4>
+        <p>Team formed, SAP-1 architecture selected as base design. Ben Eater kit bundle ordered. Subsystem responsibilities assigned: Nix (clock/ALU), Adams (RAM/PC/enclosure), Segraves (control logic/EEPROM/visualizer).</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jan 2026 — Hardware Build</div>
+        <h4>Breadboard Assembly</h4>
+        <p>All four base SAP-1 subsystems assembled on breadboards following Ben Eater's design. Clock module, ALU, registers, RAM, program counter, and output stage populated and wired.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Feb 2026 — EEPROM Programming</div>
+        <h4>Microcode &amp; Display Decoder</h4>
+        <p>AT28C16 EEPROMs programmed via T48 programmer. Display decoder binary generated in C and written to EEPROM. Microcode control words defined and verified. 7-segment output displaying decimal values confirmed.</p>
+      </div>
+      <div class="tl-item wip">
+        <div class="tl-date">Mar 2026 — In Progress</div>
+        <h4>STM32 Bus Visualizer</h4>
+        <p>STM32F411 firmware under active development. 74HC165 shift register chain assembled and SPI communication verified. TFT display driver integration in progress. 71-signal live display being finalized.</p>
+      </div>
+      <div class="tl-item wip">
+        <div class="tl-date">Mar–Apr 2026 — In Progress</div>
+        <h4>Integration &amp; Debug</h4>
+        <p>Full system integration across all subsystems. Instruction set verification, timing analysis, and end-to-end program execution testing.</p>
+      </div>
+      <div class="tl-item pending">
+        <div class="tl-date">Apr 2026 — Upcoming</div>
+        <h4>Final Demonstration</h4>
+        <p>Live demonstration of complete fetch-decode-execute cycle with real-time bus visualization. Final documentation, video walkthrough, and capstone presentation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">03 — Photos</div>
+    <div class="section-title" style="font-size:1.8rem;">Build Progress</div>
+    <p style="color:var(--text-dim); font-weight:300; margin-bottom:1rem;">[ Add your breadboard photos here — replace the placeholder slots below with &lt;img&gt; tags pointing to your image files in the docs/ folder ]</p>
+    <div class="photo-grid">
+      <div class="photo-slot">📷 Full Board Overview</div>
+      <div class="photo-slot">📷 Clock Module</div>
+      <div class="photo-slot">📷 ALU &amp; Registers</div>
+      <div class="photo-slot">📷 RAM &amp; Program Counter</div>
+      <div class="photo-slot">📷 Output / 7-Seg Display</div>
+      <div class="photo-slot">📷 STM32 Visualizer</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">04 — Testing &amp; Results</div>
+    <div class="section-title" style="font-size:1.8rem;">Verification</div>
+    <table class="test-table">
+      <thead><tr><th>Test</th><th>Method</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>Clock module oscillation</td><td>Oscilloscope — verify square wave output at set frequency</td><td class="pass">PASS</td></tr>
+        <tr><td>Manual single-step mode</td><td>Step through clock pulses manually, verify bus transitions</td><td class="pass">PASS</td></tr>
+        <tr><td>ALU addition (A + B)</td><td>Load known values into A and B registers, verify sum on bus</td><td class="pass">PASS</td></tr>
+        <tr><td>ALU subtraction (A − B)</td><td>Verify two's complement subtraction and carry flag</td><td class="pass">PASS</td></tr>
+        <tr><td>RAM write / read</td><td>Manually program RAM, verify readback via data bus</td><td class="pass">PASS</td></tr>
+        <tr><td>Program counter increment</td><td>Step through clock cycles, verify PC increments 0→F</td><td class="pass">PASS</td></tr>
+        <tr><td>EEPROM display decoder</td><td>Drive known binary inputs, verify correct decimal on 7-seg</td><td class="pass">PASS</td></tr>
+        <tr><td>EEPROM microcode output</td><td>Step through instruction T-states, verify control word bits</td><td class="pass">PASS</td></tr>
+        <tr><td>74HC165 SPI chain readback</td><td>Drive known signals, verify STM32 reads correct 72-bit word</td><td class="wip-status">IN PROGRESS</td></tr>
+        <tr><td>TFT display rendering</td><td>Verify live signal state display updates each clock cycle</td><td class="wip-status">IN PROGRESS</td></tr>
+        <tr><td>Full program execution</td><td>Load and run ADD/SUB program, verify correct output</td><td class="wip-status">IN PROGRESS</td></tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+
+<footer>
+  <span>8-Bit Breadboard Computer &nbsp;·&nbsp; ENEE 4850 SP2026 &nbsp;·&nbsp; UTC</span>
+  <span>Segraves · Nix · Adams &nbsp;·&nbsp; Advisor: Dr. Abdul Ofoli</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background | 8-Bit Breadboard Computer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-header { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  .page-header .section-label { margin-bottom: 0.5rem; }
+  section { padding: 3rem 0; border-top: 1px solid var(--border); }
+  .body-text p { color: var(--text-dim); margin-bottom: 1rem; font-weight: 300; font-size: 1rem; line-height: 1.8; }
+  .body-text p strong { color: var(--text); font-weight: 600; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  @media(max-width:768px){ .two-col { grid-template-columns:1fr; } }
+
+  .info-block { background: var(--surface); border: 1px solid var(--border); padding: 1.5rem; margin-bottom: 1rem; }
+  .info-block h4 { font-family: var(--display); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; color: var(--accent2); }
+  .info-block p { font-size: 0.9rem; color: var(--text-dim); font-weight: 300; }
+
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; }
+  .spec-table th { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); text-align: left; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
+  .spec-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 300; }
+  .spec-table tr:hover td { background: var(--surface); color: var(--text); }
+  .spec-table td:first-child { color: var(--text); font-weight: 600; font-size: 0.88rem; }
+  .spec-val { font-family: var(--mono); color: var(--accent) !important; font-size: 0.85rem !important; }
+
+  .arch-diagram { background: var(--surface); border: 1px solid var(--border); padding: 2rem; text-align: center; margin: 1.5rem 0; }
+  .arch-diagram .placeholder { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; padding: 2rem; border: 1px dashed var(--border); }
+
+  .standard-item { display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+  .standard-item:last-child { border-bottom: none; }
+  .std-code { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); white-space: nowrap; padding-top: 0.1rem; min-width: 120px; }
+  .std-desc { font-size: 0.9rem; color: var(--text-dim); font-weight: 300; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">8BIT.COMPUTER // ENEE4850</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="background.html" class="active">Background</a></li>
+    <li><a href="design.html">Design</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="section-label">Technical Background</div>
+    <div class="section-title">Architecture, Specs &amp; Standards</div>
+  </div>
+
+  <section>
+    <div class="section-label">01 — SAP-1 Architecture</div>
+    <div class="section-title" style="font-size:1.8rem;">Simple As Possible</div>
+    <div class="two-col">
+      <div class="body-text">
+        <p>The SAP-1 (Simple As Possible 1) is a minimal 8-bit computer architecture described by Malvino and Brown in <em>Digital Computer Electronics</em> and popularized by Ben Eater's YouTube series. It represents the simplest complete stored-program computer capable of executing a meaningful instruction set.</p>
+        <p>The architecture features an <strong>8-bit data bus</strong>, a <strong>4-bit address space</strong> (16 bytes of RAM), a basic ALU supporting addition and subtraction, and a control unit driven by a microcode ROM. All registers communicate over a shared bus, with control signals gating data onto and off the bus each clock cycle.</p>
+        <p>The fetch-decode-execute cycle operates in discrete steps called <strong>T-states</strong>. Each instruction is broken into microoperations — typically 2 fetch steps and 1–3 execute steps — with the control ROM outputting the appropriate control word for each T-state based on the current opcode.</p>
+      </div>
+      <div>
+        <div class="info-block">
+          <h4>Data Bus</h4>
+          <p>8-bit shared bus. All registers tri-state onto the bus. Only one source drives the bus at any time — enforced by control signals.</p>
+        </div>
+        <div class="info-block">
+          <h4>Address Space</h4>
+          <p>4-bit program counter and MAR give 16 addressable locations. 16 bytes of RAM is sufficient for demonstration programs.</p>
+        </div>
+        <div class="info-block">
+          <h4>Control Unit</h4>
+          <p>Microcode stored in AT28C16 EEPROMs. Each address encodes opcode + T-state; output is a 16-bit control word enabling/disabling subsystem actions.</p>
+        </div>
+        <div class="info-block">
+          <h4>Clock</h4>
+          <p>Variable frequency from sub-1Hz (step-through debug) to several kHz. 555-timer based, switchable between manual single-step and automatic modes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">02 — STM32 Visualizer</div>
+    <div class="section-title" style="font-size:1.8rem;">Novel Contribution</div>
+    <div class="body-text">
+      <p>The team's primary contribution beyond the base SAP-1 design is a <strong>real-time bus visualization system</strong> built around an STM32F411 (Black Pill) microcontroller. The system monitors 71 internal signals — data bus lines, address lines, control word bits, register outputs, and ALU flags — and displays their state in real time on a 4" TFT LCD over SPI.</p>
+      <p>Because the STM32 has limited GPIO, signal acquisition uses <strong>nine daisy-chained 74HC165 parallel-in serial-out shift registers</strong>, each capturing 8 signals. The STM32 clocks out all 72 bits (71 signals + 1 spare) in a single SPI burst per clock cycle, allowing non-intrusive observation of the entire bus state without loading the TTL logic.</p>
+    </div>
+    <div class="spec-table" style="margin-top:1.5rem;">
+      <table class="spec-table">
+        <thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Monitored signals</td><td class="spec-val">71</td><td>Data bus, address, control word, flags</td></tr>
+          <tr><td>Shift register chain</td><td class="spec-val">9× 74HC165</td><td>Daisy-chained, parallel-in serial-out</td></tr>
+          <tr><td>Communication</td><td class="spec-val">SPI</td><td>STM32 as master, shift registers as slave chain</td></tr>
+          <tr><td>MCU</td><td class="spec-val">STM32F411CEU6</td><td>Black Pill, 100MHz, 128KB RAM</td></tr>
+          <tr><td>Display</td><td class="spec-val">4.0" TFT LCD</td><td>480×320, ST7796S driver, SPI</td></tr>
+          <tr><td>Firmware</td><td class="spec-val">STM32CubeIDE / C</td><td>HAL-based SPI, GPIO, TIM drivers</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">03 — Engineering Specifications</div>
+    <div class="section-title" style="font-size:1.8rem;">Design Requirements</div>
+    <table class="spec-table">
+      <thead><tr><th>Requirement</th><th>Target</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Execute fetch-decode-execute cycle correctly</td><td class="spec-val">All instructions</td><td>In progress</td></tr>
+        <tr><td>Clock frequency range</td><td class="spec-val">&lt;1 Hz – ~1 kHz</td><td>Complete</td></tr>
+        <tr><td>RAM capacity</td><td class="spec-val">16 bytes</td><td>Complete</td></tr>
+        <tr><td>Bus visualization signal count</td><td class="spec-val">≥ 64 signals</td><td>71 implemented</td></tr>
+        <tr><td>Visualizer update rate</td><td class="spec-val">Every clock cycle</td><td>In progress</td></tr>
+        <tr><td>7-segment display output</td><td class="spec-val">Decimal + hex</td><td>Complete</td></tr>
+        <tr><td>EEPROM microcode programmable via PC</td><td class="spec-val">T48 programmer</td><td>Complete</td></tr>
+        <tr><td>All ICs from 74LS / 74HC series</td><td class="spec-val">No FPGAs or CPLDs</td><td>Complete</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-label">04 — Codes &amp; Standards</div>
+    <div class="section-title" style="font-size:1.8rem;">Applicable References</div>
+    <div class="standard-item">
+      <div class="std-code">74LS / 74HC</div>
+      <div class="std-desc">Texas Instruments TTL and CMOS logic family datasheets. All ICs operate within specified VCC (5V ±5%), IOH/IOL fan-out, and propagation delay parameters.</div>
+    </div>
+    <div class="standard-item">
+      <div class="std-code">AT28C16</div>
+      <div class="std-desc">Microchip AT28C16 EEPROM datasheet — 2K×8 CMOS EEPROM. Programming via T48 programmer with verified write/verify cycle.</div>
+    </div>
+    <div class="standard-item">
+      <div class="std-code">SPI Protocol</div>
+      <div class="std-desc">Serial Peripheral Interface — standard 4-wire synchronous protocol (MOSI, MISO, SCK, CS) used between STM32 and shift register chain and between STM32 and TFT display.</div>
+    </div>
+    <div class="standard-item">
+      <div class="std-code">STM32 HAL</div>
+      <div class="std-desc">STMicroelectronics Hardware Abstraction Layer (HAL) used for all peripheral drivers. Firmware developed in STM32CubeIDE.</div>
+    </div>
+    <div class="standard-item">
+      <div class="std-code">Malvino &amp; Brown</div>
+      <div class="std-desc"><em>Digital Computer Electronics, 3rd Ed.</em> — Primary architectural reference for SAP-1 design, instruction set, and microcode structure.</div>
+    </div>
+    <div class="standard-item">
+      <div class="std-code">Ben Eater</div>
+      <div class="std-desc">eater.net 8-bit breadboard computer series — implementation reference for all base SAP-1 subsystems including clock, ALU, registers, RAM, and output stage.</div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span>8-Bit Breadboard Computer &nbsp;·&nbsp; ENEE 4850 SP2026 &nbsp;·&nbsp; UTC</span>
+  <span>Segraves · Nix · Adams &nbsp;·&nbsp; Advisor: Dr. Abdul Ofoli</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact | 8-Bit Breadboard Computer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .page-header { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  section { padding: 3rem 0; border-top: 1px solid var(--border); }
+
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .team-card { background: var(--surface); padding: 2rem; transition: background 0.2s; }
+  .team-card:hover { background: #161b22; }
+  .team-role { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .team-card h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.02em; }
+  .team-card .sub { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; margin-bottom: 1.25rem; }
+  .team-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .team-contact-list li { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 0.5rem; align-items: flex-start; }
+  .team-contact-list li span:first-child { color: var(--accent2); min-width: 3rem; }
+  .team-contact-list a { color: var(--text-dim); text-decoration: none; }
+  .team-contact-list a:hover { color: var(--accent); }
+  .team-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+
+  .advisor-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 2rem; margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media(max-width:640px){ .advisor-card { grid-template-columns: 1fr; } }
+  .advisor-card h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .advisor-card .sub { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; margin-bottom: 1rem; }
+  .advisor-card .contact-item { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.35rem; }
+  .advisor-card .contact-item span { color: var(--accent2); margin-right: 0.5rem; }
+  .advisor-card p { font-size: 0.9rem; color: var(--text-dim); font-weight: 300; line-height: 1.7; }
+
+  .repo-card { background: var(--surface); border: 1px solid var(--border); padding: 1.75rem; margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .repo-card h4 { font-family: var(--display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem; }
+  .repo-card p { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; }
+  .repo-link { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); text-decoration: none; padding: 0.6rem 1.25rem; border: 1px solid var(--accent); border-radius: 3px; white-space: nowrap; transition: all 0.2s; }
+  .repo-link:hover { background: rgba(0,255,136,0.1); }
+
+  .dept-info { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; line-height: 1.9; margin-top: 1rem; }
+  .dept-info strong { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">8BIT.COMPUTER // ENEE4850</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="background.html">Background</a></li>
+    <li><a href="design.html">Design</a></li>
+    <li><a href="budget.html">Budget</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="section-label">Team &amp; Contact Information</div>
+    <div class="section-title">The Team</div>
+  </div>
+
+  <section>
+    <div class="section-label">01 — Team Members</div>
+    <div class="section-title" style="font-size:1.8rem;">Capstone Team</div>
+    <div class="team-grid">
+
+      <div class="team-card">
+        <div class="team-role">Project Lead — Clock &amp; Arithmetic</div>
+        <h3>Braylon Nix</h3>
+        <div class="sub">B.S. Electrical Engineering · UTC SP2026</div>
+        <hr class="team-divider">
+        <ul class="team-contact-list">
+          <li><span>Area</span><span>Clock module, ALU, arithmetic logic</span></li>
+          <li><span>Dept</span><span>Electrical Engineering, UTC</span></li>
+          <li><span>Email</span><a href="mailto:">[ add email ]</a></li>
+        </ul>
+      </div>
+
+      <div class="team-card">
+        <div class="team-role">RAM &amp; Program Counter</div>
+        <h3>Andrew Adams</h3>
+        <div class="sub">B.S. Electrical Engineering · UTC SP2026</div>
+        <hr class="team-divider">
+        <ul class="team-contact-list">
+          <li><span>Area</span><span>RAM, program counter, enclosure</span></li>
+          <li><span>Dept</span><span>Electrical Engineering, UTC</span></li>
+          <li><span>Email</span><a href="mailto:">[ add email ]</a></li>
+        </ul>
+      </div>
+
+      <div class="team-card">
+        <div class="team-role">Control Logic &amp; STM32 Visualizer</div>
+        <h3>Philip Segraves</h3>
+        <div class="sub">B.S. Electrical Engineering · Minors: CS, Math · UTC SP2026</div>
+        <hr class="team-divider">
+        <ul class="team-contact-list">
+          <li><span>Area</span><span>Control logic, EEPROM programming, STM32 firmware</span></li>
+          <li><span>Dept</span><span>Electrical Engineering, UTC</span></li>
+          <li><span>GitHub</span><a href="https://github.com/philgravy" target="_blank">github.com/philgravy</a></li>
+          <li><span>Email</span><a href="mailto:">[ add email ]</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">02 — Faculty Advisor</div>
+    <div class="section-title" style="font-size:1.8rem;">Technical Advisor</div>
+    <div class="advisor-card">
+      <div>
+        <h3>Dr. Abdul Ofoli</h3>
+        <div class="sub">Faculty Advisor · ENEE 4850 Capstone Design</div>
+        <div class="contact-item"><span>Dept</span>Electrical Engineering, UTC</div>
+        <div class="contact-item"><span>Univ</span>University of Tennessee at Chattanooga</div>
+        <div class="contact-item"><span>Email</span>[ add email ]</div>
+        <div class="contact-item"><span>Web</span>[ add faculty page URL ]</div>
+      </div>
+      <div>
+        <p>Dr. Ofoli serves as the faculty advisor and technical supervisor for the ENEE 4850 Capstone Design course. The team meets regularly with Dr. Ofoli to review design progress, discuss technical challenges, and ensure the project meets engineering and academic standards.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">03 — Repository &amp; Institution</div>
+    <div class="section-title" style="font-size:1.8rem;">Resources</div>
+
+    <div class="repo-card">
+      <div>
+        <h4>GitHub Repository</h4>
+        <p>Full source code, schematics, firmware, and documentation</p>
+      </div>
+      <a href="https://github.com/philgravy/8-bit-computer" target="_blank" class="repo-link">github.com/philgravy/8-bit-computer</a>
+    </div>
+
+    <div class="dept-info" style="margin-top: 2rem;">
+      <strong>Department of Electrical Engineering</strong><br>
+      University of Tennessee at Chattanooga<br>
+      615 McCallie Ave, Chattanooga, TN 37403<br>
+      <br>
+      <strong>Course:</strong> ENEE 4850 — Capstone Design, Spring 2026<br>
+      <strong>Project:</strong> 8-Bit Breadboard Computer<br>
+      <strong>Status:</strong> <span style="color: var(--accent); font-family: var(--mono); font-size: 0.8rem;">In Progress</span>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span>8-Bit Breadboard Computer &nbsp;·&nbsp; ENEE 4850 SP2026 &nbsp;·&nbsp; UTC</span>
+  <span>Segraves · Nix · Adams &nbsp;·&nbsp; Advisor: Dr. Abdul Ofoli</span>
+</footer>
+</body>
+</html>
