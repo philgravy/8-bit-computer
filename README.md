@@ -124,9 +124,7 @@ See [`firmware/eeprom/`](./firmware/eeprom/) for the EEPROM programmer code and 
 | IR | Instruction Register | Stores the current instruction being executed. |
 | CU | Control Unit | Generates control signals to coordinate CPU operations; implemented via microcode in EEPROM. |
 | EEPROM | Electrically Erasable Programmable Read-Only Memory | Stores microcode that defines control logic behavior. |
-| Bus | System Bus | Shared data pathway connecting registers, ALU, and memory. |
 | CLK | Clock | Provides timing signals to synchronize system operations. |
-| Reg | Register | Small, fast storage unit used to hold intermediate data within the CPU. |
 
 ---
 
