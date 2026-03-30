@@ -181,4 +181,4 @@ Same pattern as `JC` but gated on the zero flag bit in the EEPROM address.
 
 ## Microcode Overview
 
-See [Microcode Overview](Microcode Overview.md) to see how this is implemented.
+See `Microcode Overview.md` to see how this is implemented.
