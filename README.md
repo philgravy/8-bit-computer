@@ -4,8 +4,8 @@
 
 ![Build Status](https://img.shields.io/badge/status-in%20progress-yellow?style=flat-square)
 ![Architecture](https://img.shields.io/badge/architecture-SAP--1-blue?style=flat-square)
-<!--[Clock Speed](https://img.shields.io/badge/clock-variable%20Hz-green?style=flat-square)-->
 ![License](https://img.shields.io/badge/license-MIT-lightgrey?style=flat-square)
+<!--[Clock Speed](https://img.shields.io/badge/clock-variable%20Hz-green?style=flat-square)-->
 
 **A fully functional 8-bit computer built from discrete 74LS-series logic ICs on breadboards.**  
 Inspired by Ben Eater's SAP-1 architecture, extended with STM32-driven real-time visualization.
