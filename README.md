@@ -82,19 +82,7 @@ See [`firmware/eeprom/`](./firmware/eeprom/) for the EEPROM programmer code and 
 ## Repository Structure
 
 ```
-8-bit-computer/
-├── README.md
-├── docs/                   # GitHub Pages (Docsify)
-│   ├── index.html
-│   ├── _sidebar.md
-│   ├── overview.md
-│   └── modules/
-├── schematics/             # KiCad source files + PNG exports
-├── firmware/
-│   └── eeprom/             # EEPROM programmer (Arduino)
-└── hardware/
-    ├── BOM.md
-    └── notes.md
+UPDATE IT
 ```
 
 ---
