@@ -40,6 +40,7 @@ This project implements a custom 8-bit CPU entirely from TTL logic on breadboard
 ## Architecture
 
 <img src="https://github.com/user-attachments/assets/18fbd141-401d-40cf-bfd1-50ad22ab90a3" width="500">
+
 ---
 
 ## Modules
