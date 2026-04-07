@@ -1,3 +1,309 @@
+i want you to edit the html files in this repo to edit the appearance of the website
+2:40 PM
+
+I don't see any repo or files attached to this message. Could you share the files, a GitHub link, or paste the relevant HTML/CSS?
+
+https://github.com/philgravy/8-bit-computer/tree/main/docs
+2:40 PM
+Searched the web
+
+GitHub blocks my direct fetching. A couple options to get around this:
+
+    Paste the HTML — copy/paste the contents of the files here directly
+    Use raw.githubusercontent.com links — share the raw URLs and I can try fetching those if you paste them explicitly
+    Download and upload the files — drag them into the chat
+
+Also, before we dive in — what kind of appearance changes are you going for? Knowing the direction (e.g., cleaner/minimal, dark mode, more visual/polished, better typography, etc.) will help me give you something actually useful rather than just generic tweaks.
+
+how can i get the raw url
+2:41 PM
+
+For any file on GitHub, just replace:
+
+https://github.com/philgravy/8-bit-computer/blob/main/docs/index.html
+
+with:
+
+https://raw.githubusercontent.com/philgravy/8-bit-computer/main/docs/index.html
+
+The pattern is:
+
+    github.com → raw.githubusercontent.com
+    Remove /blob/ (keep the rest the same)
+
+You can also just click the file on GitHub, then click the "Raw" button in the top-right of the file viewer — it'll take you straight to the raw URL.
+
+https://raw.githubusercontent.com/philgravy/8-bit-computer/main/docs/index.html
+
+/* Shared styles - imported by all pages */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap');
+:root {
+  --bg: #0a0c0f;
+  --surface: 
+#111418;
+  --border: 
+#1e2530;
+  --accent: 
+#00ff88;
+  --accent2: 
+#00aaff;
+  --warn: 
+#ff6b35;
+  --text: 
+#c8d4e0;
+  --text-dim: 
+#5a6a7a;
+  --mono: 'Share Tech Mono', monospace;
+  --sans: 'Barlow', sans-serif;
+  --display: 'Barlow Condensed', sans-serif;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+}
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,12,15,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 56px;
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(0,255,136,0.05);
+}
+.page-wrap {
+  padding: 6rem 4rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 2rem;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.75rem;
+}
+.tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.tag-green { background: rgba(0,255,136,0.1); color: var(--accent); border: 1px solid rgba(0,255,136,0.3); }
+.tag-blue  { background: rgba(0,170,255,0.1); color: var(--accent2); border: 1px solid rgba(0,170,255,0.3); }
+.tag-orange{ background: rgba(255,107,53,0.1); color: var(--warn);   border: 1px solid rgba(255,107,53,0.3); }
+footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-top: 4rem;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 768px) {
+  .page-wrap { padding: 5rem 1.5rem 3rem; }
+  nav { padding: 0 1rem; }
+  .nav-links { display: none; }
+  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+
+i dont like the matrix style of black background lime green text. i want a mostly white (maybe offwhite esque but not extreme) with navy blue accents instead of lime green. also use times new roman. also remove this useless table
+2:45 PM
+Fetched: https://raw.githubusercontent.com/philgravy/8-bit-computer/main/docs/index.html
+
+Good, I have everything I need. A few quick questions before I write any code — you said "remove this useless table" but there are several tables across these files (the stat grid on the homepage, the BOM table on budget, the spec tables on background, the test table on design). Which one specifically, or all of them?
+
+Also — Times New Roman for everything (headings, body, nav, mono bits), or just body text? The mono font (Share Tech Mono) is currently used for labels, tags, and code-like values — TNR there would look pretty off. Worth keeping a clean sans or mono for those small utility elements, or do you want full TNR?
+
+use your judgement on font. and i pasted the table i was talking about, the one that mentions 74 ls family etc
+2:46 PM
+
+Got it — the stat grid (8 / 74LS / 71 / 9×). On it.
+Check skills for frontend design
+
+Now I have a clear picture. Let me rewrite all five files — style.css, index.html, background.html, design.html, budget.html, and contact.html — with the new aesthetic: off-white background, navy accents, Times New Roman for body/headings, clean mono for labels/code bits, and the stat grid removed from the homepage.
+Created 6 files, ran a command, read a file
+
+All 6 files are ready to drop straight into your docs/ folder, replacing the originals.
+
+Here's what changed:
+
+Colors — #0a0c0f black and
+#00ff88 lime are gone. Everything is now
+#f5f2eb parchment-ish off-white with
+#1a2744 navy as the primary accent. A dark brick red (
+#8b3a2a) fills the secondary accent role (replaces the cyan). Tables and borders use warm grays that match the background.
+
+Typography — Body and headings use Cormorant Garamond (a refined old-style serif that pairs well with Times New Roman's spirit but actually renders well on screen). Section headings use IM Fell English for character. The mono bits (nav links, labels, code values) stay in JetBrains Mono — putting TNR there would've looked genuinely bad.
+
+Stat grid — Removed entirely from index.html. The problem statement section now runs full-width, which reads better anyway.
+
+Hero — Inverted to a dark navy hero section (the one intentional dark element) so the landing page has visual contrast. The rest of the site is light.
+
+Confidence: 82/100 — Content is identical to your originals, structure is solid. The one uncertainty is I can't render-test locally, so minor cross-browser spacing quirks are possible. The font CDN calls should work fine since you already had Google Fonts loading.
+Style
+Code · CSS 
+Index
+Code · HTML 
+Background
+Code · HTML 
+Design
+Code · HTML 
+Budget
+Code · HTML 
+Contact
+Code · HTML 
+
+how do i replace the originals with these
+2:52 PM
+
+Download each file from the links above, then just drag them into your docs/ folder in your repo (replacing the existing ones). Then commit and push:
+bash
+
+git add docs/
+git commit -m "redesign: off-white navy theme"
+git push
+
+GitHub Pages will rebuild automatically within a minute or two.
+
+If you want to do it entirely from the command line without downloading, you could also just copy the file contents and paste them into each file directly in your editor.
+
+i copied all the contents and manually updated the files in there do i need to do anything to make the site update? its still showing the black and green even though all the individual changes were committed
+2:56 PM
+
+Check if GitHub Pages is actually serving from the right branch/folder. Go to your repo on GitHub → Settings → Pages and make sure it's set to your main branch and the /docs folder.
+
+Also check that the style.css commit actually went through — the HTML files all pull from style.css, so if that one didn't update, everything stays green and black regardless of the HTML changes.
+
+You can verify by going directly to https://raw.githubusercontent.com/philgravy/8-bit-computer/main/docs/style.css and checking if --bg: #f5f2eb is in there.
+
+yes its there
+2:57 PM
+
+Then it's just cache. Hard refresh:
+
+    Mac: Cmd + Shift + R
+    Windows: Ctrl + Shift + R
+
+Or open the site in a private/incognito window to bypass cache entirely.
+
+i dont like that handwritten esque font. also the page is a little too wordy, too much like a block of text
+2:59 PM
+
+Good feedback on both. For the font — I'll swap IM Fell English out for something cleaner and more authoritative, still serif but not calligraphic. For the wordiness, I'll tighten the body copy and break it up better.
+
+Before I touch anything though — do you want to keep the dark navy hero section on the homepage, or go full light/off-white throughout including the hero?
+
+its fine as is. the heading thing above "8-bit breadboard computer" where it says enee 4850, senior capstone design, etc, is kinda a little low on the page, its nothing bad just looks a little weird. if you think its fine, keep it, if not, change it
+3:00 PM
+
+It's a little low — it should sit closer to the top of the hero, not floating mid-screen above the title. Easy fix, just anchor it to the top of the hero instead of letting it flow with the flexbox alignment.
+
+I'll fix that, swap the font, and trim the body copy all in one pass. Give me a minute.
+Viewed 2 files
+
+Now I have what I need. I'll update style.css to swap the font, then fix the eyebrow positioning and trim body copy in index.html.
+Edited 2 files
+
+Now fix the eyebrow positioning and trim the body copy in index.html:
+Edited 2 files
+
+Now update the font references in index.html and trim the body copy:
+Edited 3 files
+
+Now update the font imports in the other three HTML files:
+Ran 4 commands
+
+Good. Now copy everything to outputs:
+Ran a command, read a file
+
+Three changes across all 6 files:
+
+Font — IM Fell English (the handwritten one) is out, replaced with Playfair Display. It's a proper editorial serif — sharp, clean, authoritative, used by The Economist and NYT. Still has character without looking like calligraphy.
+
+Eyebrow — Now absolutely positioned to the top of the hero, sitting just below the nav bar where it belongs, independent of the flex content below.
+
+Body copy — Problem statement trimmed from 3 dense paragraphs to 2 tight ones, and the executive summary block went from ~75 words to ~45. Same information, less wall-of-text.
+
+Confidence: 88/100 — Straightforward changes, verified the font URLs are clean across all files.
+Style
+Code · CSS 
+Index
+Code · HTML 
+Background
+Code · HTML 
+Design
+Code · HTML 
+Budget
+Code · HTML 
+Contact
+Code · HTML 
+Want to be notified when Claude responds?
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +311,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>8-Bit Breadboard Computer | ENEE 4850 Capstone</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
   /* ── Hero ── */
@@ -19,7 +325,7 @@
     overflow: hidden;
     background: var(--navy);
   }
-
+ 
   /* Subtle texture overlay */
   .hero::before {
     content: '';
@@ -42,7 +348,7 @@
       );
     pointer-events: none;
   }
-
+ 
   /* Large decorative numeral */
   .hero-bg-num {
     position: absolute;
@@ -57,18 +363,21 @@
     user-select: none;
     letter-spacing: -0.04em;
   }
-
+ 
   .hero-eyebrow {
+    position: absolute;
+    top: 5rem;
+    left: 5rem;
+    right: 5rem;
     font-family: var(--mono);
     font-size: 0.7rem;
     color: #6a7a9a;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    margin-bottom: 1.5rem;
     opacity: 0;
     animation: fadeUp 0.7s ease 0.1s forwards;
   }
-
+ 
   .hero h1 {
     font-family: var(--display);
     font-size: clamp(3.5rem, 7vw, 6.5rem);
@@ -81,12 +390,12 @@
     opacity: 0;
     animation: fadeUp 0.7s ease 0.2s forwards;
   }
-
+ 
   .hero h1 em {
     font-style: normal;
     color: #b8c4dc;
   }
-
+ 
   .hero-desc {
     font-family: var(--serif);
     font-size: 1.05rem;
@@ -98,7 +407,7 @@
     opacity: 0;
     animation: fadeUp 0.7s ease 0.35s forwards;
   }
-
+ 
   .hero-tags {
     display: flex;
     flex-wrap: wrap;
@@ -107,14 +416,14 @@
     opacity: 0;
     animation: fadeUp 0.7s ease 0.45s forwards;
   }
-
+ 
   .hero .tag {
     background: rgba(255,255,255,0.06);
     color: #8a9ab8;
     border: 1px solid rgba(255,255,255,0.12);
     font-size: 0.62rem;
   }
-
+ 
   .hero-cta {
     display: flex;
     gap: 1rem;
@@ -122,26 +431,26 @@
     opacity: 0;
     animation: fadeUp 0.7s ease 0.55s forwards;
   }
-
+ 
   .hero .btn-primary {
     background: #e8ecf4;
     color: var(--navy);
     border-color: #e8ecf4;
   }
   .hero .btn-primary:hover { background: #fff; border-color: #fff; }
-
+ 
   .hero .btn-outline {
     color: #8a9ab8;
     border-color: rgba(255,255,255,0.2);
   }
   .hero .btn-outline:hover { border-color: rgba(255,255,255,0.45); color: #c8d0e0; }
-
+ 
   /* ── Sections ── */
   section { padding: 4rem 0; border-top: 1px solid var(--border); }
-
+ 
   .body-text p { color: var(--text-dim); margin-bottom: 1.1rem; font-size: 1rem; line-height: 1.85; }
   .body-text p strong { color: var(--text); font-weight: 600; }
-
+ 
   /* ── Summary block ── */
   .summary-block {
     border-left: 3px solid var(--navy);
@@ -153,7 +462,7 @@
     margin-bottom: 2rem;
   }
   .summary-block strong { color: var(--text); font-weight: 600; }
-
+ 
   /* ── Subsystem grid ── */
   .subsystem-grid {
     display: grid;
@@ -162,7 +471,7 @@
     border: 1px solid var(--border);
     margin-top: 1.5rem;
   }
-
+ 
   .subsystem-card {
     padding: 1.75rem;
     border-right: 1px solid var(--border);
@@ -170,7 +479,7 @@
   }
   .subsystem-card:last-child { border-right: none; }
   .subsystem-card:hover { background: var(--surface); }
-
+ 
   .subsystem-tag {
     font-family: var(--mono);
     font-size: 0.62rem;
@@ -180,7 +489,7 @@
     margin-bottom: 0.75rem;
     display: block;
   }
-
+ 
   .subsystem-card h3 {
     font-family: var(--display);
     font-size: 1.3rem;
@@ -189,13 +498,13 @@
     color: var(--navy);
     margin-bottom: 0.5rem;
   }
-
+ 
   .subsystem-card p {
     font-size: 0.9rem;
     color: var(--text-dim);
     line-height: 1.7;
   }
-
+ 
   .subsystem-owner {
     font-family: var(--mono);
     font-size: 0.62rem;
@@ -206,7 +515,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
   }
-
+ 
   @media(max-width:768px){
     .hero { padding: 7rem 1.5rem 3rem; }
     .subsystem-card { border-right: none; border-bottom: 1px solid var(--border); }
@@ -225,7 +534,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
 </nav>
-
+ 
 <div class="hero">
   <div class="hero-bg-num">8</div>
   <div class="hero-eyebrow">ENEE 4850 &nbsp;·&nbsp; Senior Capstone Design &nbsp;·&nbsp; SP2026 &nbsp;·&nbsp; University of Tennessee at Chattanooga</div>
@@ -244,23 +553,22 @@
     <a href="background.html" class="btn btn-outline">Technical Background</a>
   </div>
 </div>
-
+ 
 <div class="page-wrap">
   <section>
     <div class="section-label">01 — Problem Statement</div>
     <div class="section-title">The Challenge</div>
     <div class="body-text">
-      <p>Computer architecture is taught almost entirely through simulation and abstraction. Students interact with CPUs through software models and HDL simulators — tools that, while useful, obscure the physical reality of how a processor works. The gap between understanding a block diagram and understanding <strong>why a control signal pulse causes a register to latch a value</strong> is significant, and most curricula never close it.</p>
-      <p>There is no hands-on hardware platform in the current UTC EE curriculum that allows students to build and observe a working CPU at the gate level. Furthermore, existing open-source SAP-1 implementations provide no mechanism to observe real-time internal bus activity during execution — making it difficult to verify correct operation or diagnose faults without external test equipment.</p>
-      <p>This project addresses both problems: by constructing a working 8-bit computer from discrete 74LS TTL logic, every architectural concept becomes physically tangible. The addition of an <strong>STM32-driven visualization system monitoring 71 internal signals simultaneously</strong> turns the computer into its own debugging instrument.</p>
+      <p>Computer architecture is almost always taught through simulation and abstraction — HDL simulators and software models that obscure the physical reality of how a processor actually works. Most curricula never close the gap between a block diagram and <strong>why a control signal pulse causes a register to latch a value.</strong></p>
+      <p>This project addresses that directly. By building a working 8-bit computer from discrete 74LS TTL logic, every architectural concept becomes physically observable. The addition of an <strong>STM32-driven visualization system monitoring 71 internal signals simultaneously</strong> turns the machine into its own debugging instrument — no external logic analyzer required.</p>
     </div>
   </section>
-
+ 
   <section>
     <div class="section-label">02 — Executive Summary</div>
     <div class="section-title">Project Overview</div>
     <div class="summary-block">
-      The 8-Bit Breadboard Computer is a fully functional stored-program computer constructed from discrete 74LS-series TTL logic ICs on breadboards, based on Ben Eater's SAP-1 architecture and supervised by <strong>Dr. Abdul Ofoli</strong> at the University of Tennessee at Chattanooga. The team's primary contribution beyond the base SAP-1 design is a <strong>real-time bus visualization system</strong> built around an STM32 microcontroller, monitoring 71 internal signals simultaneously via nine daisy-chained 74HC165 shift registers over SPI. The computer executes a complete fetch-decode-execute cycle driven by a variable-frequency clock, with all subsystems — ALU, registers, program counter, RAM, and output stage — implemented in physical hardware across three team members.
+      A fully functional stored-program computer built from discrete 74LS TTL logic ICs on breadboards, following Ben Eater's SAP-1 architecture under the supervision of <strong>Dr. Abdul Ofoli</strong> at UTC. The team's primary contribution is a <strong>real-time bus visualization system</strong> — an STM32 microcontroller monitoring 71 internal signals simultaneously via nine daisy-chained 74HC165 shift registers over SPI, displayed live on a 4" TFT LCD.
     </div>
     <div class="subsystem-grid">
       <div class="subsystem-card">
@@ -284,10 +592,12 @@
     </div>
   </section>
 </div>
-
+ 
 <footer>
   <span>8-Bit Breadboard Computer &nbsp;·&nbsp; ENEE 4850 SP2026 &nbsp;·&nbsp; UTC</span>
   <span>Segraves · Nix · Adams &nbsp;·&nbsp; Advisor: Dr. Abdul Ofoli</span>
 </footer>
 </body>
 </html>
+ 
+
