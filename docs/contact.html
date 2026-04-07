@@ -5,41 +5,138 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact | 8-Bit Breadboard Computer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .page-header { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  .page-header { padding: 8rem 0 3rem; border-bottom: 2px solid var(--navy); margin-bottom: 3rem; }
   section { padding: 3rem 0; border-top: 1px solid var(--border); }
 
-  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
-  .team-card { background: var(--surface); padding: 2rem; transition: background 0.2s; }
-  .team-card:hover { background: #161b22; }
-  .team-role { font-family: var(--mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.75rem; }
-  .team-card h3 { font-family: var(--display); font-size: 1.5rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.25rem; letter-spacing: 0.02em; }
-  .team-card .sub { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; margin-bottom: 1.25rem; }
-  .team-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-  .team-contact-list li { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); display: flex; gap: 0.5rem; align-items: flex-start; }
-  .team-contact-list li span:first-child { color: var(--accent2); min-width: 3rem; }
-  .team-contact-list a { color: var(--text-dim); text-decoration: none; }
-  .team-contact-list a:hover { color: var(--accent); }
-  .team-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
+  /* Team grid */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-top: 1.5rem;
+  }
 
-  .advisor-card { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 2rem; margin-top: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .team-card {
+    padding: 2rem;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .team-card:last-child { border-right: none; }
+  .team-card:hover { background: var(--surface); }
+
+  .team-role {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--text-faint);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .team-card h3 {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+  }
+
+  .team-card .sub { font-size: 0.88rem; color: var(--text-faint); margin-bottom: 1.25rem; }
+
+  .team-divider { border: none; border-top: 1px solid var(--border); margin: 1.1rem 0; }
+
+  .team-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .team-contact-list li {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .team-contact-list li span:first-child { color: var(--navy); min-width: 3.5rem; font-weight: 500; }
+  .team-contact-list a { color: var(--text-dim); text-decoration: underline; text-underline-offset: 2px; }
+  .team-contact-list a:hover { color: var(--navy); }
+
+  /* Advisor card */
+  .advisor-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--navy);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
   @media(max-width:640px){ .advisor-card { grid-template-columns: 1fr; } }
-  .advisor-card h3 { font-family: var(--display); font-size: 1.3rem; font-weight: 900; text-transform: uppercase; margin-bottom: 0.25rem; }
-  .advisor-card .sub { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; margin-bottom: 1rem; }
-  .advisor-card .contact-item { font-family: var(--mono); font-size: 0.75rem; color: var(--text-dim); margin-bottom: 0.35rem; }
-  .advisor-card .contact-item span { color: var(--accent2); margin-right: 0.5rem; }
-  .advisor-card p { font-size: 0.9rem; color: var(--text-dim); font-weight: 300; line-height: 1.7; }
 
-  .repo-card { background: var(--surface); border: 1px solid var(--border); padding: 1.75rem; margin-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .repo-card h4 { font-family: var(--display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem; }
-  .repo-card p { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; }
-  .repo-link { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); text-decoration: none; padding: 0.6rem 1.25rem; border: 1px solid var(--accent); border-radius: 3px; white-space: nowrap; transition: all 0.2s; }
-  .repo-link:hover { background: rgba(0,255,136,0.1); }
+  .advisor-card h3 {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.2rem;
+  }
+  .advisor-card .sub { font-size: 0.88rem; color: var(--text-faint); margin-bottom: 1rem; }
+  .advisor-card .contact-item {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    margin-bottom: 0.35rem;
+    display: flex;
+    gap: 0.75rem;
+  }
+  .advisor-card .contact-item span { color: var(--navy); min-width: 3rem; font-weight: 500; }
+  .advisor-card p { font-size: 0.92rem; color: var(--text-dim); line-height: 1.75; }
 
-  .dept-info { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; line-height: 1.9; margin-top: 1rem; }
+  /* Repo card */
+  .repo-card {
+    background: var(--navy);
+    padding: 1.75rem 2rem;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .repo-card h4 {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 400;
+    color: #e8ecf4;
+    margin-bottom: 0.2rem;
+  }
+  .repo-card p { font-size: 0.88rem; color: #6a7a9a; }
+
+  .repo-link {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: #c8d0e0;
+    text-decoration: none;
+    padding: 0.6rem 1.25rem;
+    border: 1px solid rgba(200,208,224,0.3);
+    white-space: nowrap;
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .repo-link:hover { border-color: rgba(200,208,224,0.7); color: #fff; }
+
+  .dept-info { font-size: 0.9rem; color: var(--text-dim); line-height: 1.9; margin-top: 2rem; }
   .dept-info strong { color: var(--text); font-weight: 600; }
+
+  @media(max-width:768px){
+    .team-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .team-card:last-child { border-bottom: none; }
+  }
 </style>
 </head>
 <body>
@@ -62,7 +159,7 @@
 
   <section>
     <div class="section-label">01 — Team Members</div>
-    <div class="section-title" style="font-size:1.8rem;">Capstone Team</div>
+    <div class="section-title" style="font-size:2rem;">Capstone Team</div>
     <div class="team-grid">
 
       <div class="team-card">
@@ -107,7 +204,7 @@
 
   <section>
     <div class="section-label">02 — Faculty Advisor</div>
-    <div class="section-title" style="font-size:1.8rem;">Technical Advisor</div>
+    <div class="section-title" style="font-size:2rem;">Technical Advisor</div>
     <div class="advisor-card">
       <div>
         <h3>Dr. Abdul Ofoli</h3>
@@ -125,7 +222,7 @@
 
   <section>
     <div class="section-label">03 — Repository &amp; Institution</div>
-    <div class="section-title" style="font-size:1.8rem;">Resources</div>
+    <div class="section-title" style="font-size:2rem;">Resources</div>
 
     <div class="repo-card">
       <div>
@@ -135,14 +232,14 @@
       <a href="https://github.com/philgravy/8-bit-computer" target="_blank" class="repo-link">github.com/philgravy/8-bit-computer</a>
     </div>
 
-    <div class="dept-info" style="margin-top: 2rem;">
+    <div class="dept-info">
       <strong>Department of Electrical Engineering</strong><br>
       University of Tennessee at Chattanooga<br>
       615 McCallie Ave, Chattanooga, TN 37403<br>
       <br>
       <strong>Course:</strong> ENEE 4850 — Capstone Design, Spring 2026<br>
       <strong>Project:</strong> 8-Bit Breadboard Computer<br>
-      <strong>Status:</strong> <span style="color: var(--accent); font-family: var(--mono); font-size: 0.8rem;">In Progress</span>
+      <strong>Status:</strong> <span style="color: var(--navy); font-family: var(--mono); font-size: 0.8rem;">In Progress</span>
     </div>
   </section>
 
