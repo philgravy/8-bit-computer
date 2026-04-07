@@ -5,48 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Design & Testing | 8-Bit Breadboard Computer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600;700&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
-  .page-header { padding: 8rem 0 3rem; border-bottom: 1px solid var(--border); margin-bottom: 3rem; }
+  .page-header { padding: 8rem 0 3rem; border-bottom: 2px solid var(--navy); margin-bottom: 3rem; }
   section { padding: 3rem 0; border-top: 1px solid var(--border); }
-  .body-text p { color: var(--text-dim); margin-bottom: 1rem; font-weight: 300; line-height: 1.8; }
+  .body-text p { color: var(--text-dim); margin-bottom: 1.1rem; font-size: 1rem; line-height: 1.85; }
   .body-text p strong { color: var(--text); font-weight: 600; }
+
+  /* Design objectives */
+  .obj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-top: 1.5rem;
+  }
+  .obj-card {
+    padding: 1.5rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .obj-card:nth-child(even) { border-right: none; }
+  @media(min-width:769px) {
+    .obj-card:nth-child(3n) { border-right: none; }
+    .obj-card:nth-child(even) { border-right: 1px solid var(--border); }
+  }
+  .obj-num {
+    font-family: var(--display);
+    font-size: 2.5rem;
+    font-weight: 400;
+    color: var(--border);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .obj-card h4 {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+  }
+  .obj-card p { font-size: 0.88rem; color: var(--text-dim); line-height: 1.65; }
 
   /* Timeline */
   .timeline { position: relative; padding-left: 2rem; margin-top: 1.5rem; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border); }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--border-dk); }
+
   .tl-item { position: relative; padding-bottom: 2.5rem; }
-  .tl-item::before { content: ''; position: absolute; left: -2rem; top: 0.35rem; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px var(--accent); transform: translateX(-3.5px); }
-  .tl-item.wip::before { background: #ffd700; box-shadow: 0 0 8px #ffd700; }
-  .tl-item.pending::before { background: var(--text-dim); box-shadow: none; }
-  .tl-date { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
-  .tl-item.wip .tl-date { color: #ffd700; }
-  .tl-item.pending .tl-date { color: var(--text-dim); }
-  .tl-item h4 { font-family: var(--display); font-size: 1.1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem; }
-  .tl-item p { font-size: 0.88rem; color: var(--text-dim); font-weight: 300; }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0.4rem;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--navy);
+    transform: translateX(-3px);
+  }
+  .tl-item.wip::before { background: var(--accent2); }
+  .tl-item.pending::before { background: var(--border-dk); }
+
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.3rem;
+  }
+  .tl-item.wip .tl-date { color: var(--accent2); }
+  .tl-item.pending .tl-date { color: var(--text-faint); }
+
+  .tl-item h4 {
+    font-family: var(--display);
+    font-size: 1.2rem;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 0.3rem;
+  }
+  .tl-item p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; }
 
   /* Photo grid */
-  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1rem; margin-top: 1.5rem; }
-  .photo-slot { aspect-ratio: 4/3; background: var(--surface); border: 1px dashed var(--border); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; color: var(--text-dim); font-family: var(--mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .photo-slot {
+    aspect-ratio: 4/3;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-faint);
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
   .photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* Test table */
   .test-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; }
-  .test-table th { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); text-align: left; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); }
-  .test-table td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); color: var(--text-dim); font-weight: 300; }
+  .test-table th {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--navy);
+    background: var(--surface);
+  }
+  .test-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
   .test-table tr:hover td { background: var(--surface); }
   .test-table td:first-child { color: var(--text); font-weight: 600; }
-  .pass { color: var(--accent) !important; font-family: var(--mono); font-size: 0.78rem; }
-  .wip-status { color: #ffd700 !important; font-family: var(--mono); font-size: 0.78rem; }
-  .fail { color: var(--warn) !important; font-family: var(--mono); font-size: 0.78rem; }
 
-  /* Design objectives */
-  .obj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
-  .obj-card { background: var(--surface); padding: 1.25rem 1.5rem; }
-  .obj-num { font-family: var(--display); font-size: 2rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 0.5rem; }
-  .obj-card h4 { font-family: var(--display); font-size: 1rem; font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem; }
-  .obj-card p { font-size: 0.85rem; color: var(--text-dim); font-weight: 300; }
+  .pass      { color: #2a6e3a !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
+  .wip-status{ color: var(--accent2) !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
+  .fail      { color: #8b1a1a !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
 </style>
 </head>
 <body>
@@ -69,7 +153,7 @@
 
   <section>
     <div class="section-label">01 — Design Objectives</div>
-    <div class="section-title" style="font-size:1.8rem;">What We Set Out to Build</div>
+    <div class="section-title" style="font-size:2rem;">What We Set Out to Build</div>
     <div class="obj-grid">
       <div class="obj-card"><div class="obj-num">01</div><h4>Functional CPU</h4><p>Execute a complete fetch-decode-execute cycle using real TTL logic, no FPGAs or simulation.</p></div>
       <div class="obj-card"><div class="obj-num">02</div><h4>EEPROM Microcode</h4><p>All instruction behavior defined by programmable ROM, allowing instruction set modification without hardware changes.</p></div>
@@ -82,7 +166,7 @@
 
   <section>
     <div class="section-label">02 — Design Process</div>
-    <div class="section-title" style="font-size:1.8rem;">Progress Timeline</div>
+    <div class="section-title" style="font-size:2rem;">Progress Timeline</div>
     <div class="timeline">
       <div class="tl-item">
         <div class="tl-date">Fall 2025 — Project Kickoff</div>
@@ -119,8 +203,8 @@
 
   <section>
     <div class="section-label">03 — Photos</div>
-    <div class="section-title" style="font-size:1.8rem;">Build Progress</div>
-    <p style="color:var(--text-dim); font-weight:300; margin-bottom:1rem;">[ Add your breadboard photos here — replace the placeholder slots below with &lt;img&gt; tags pointing to your image files in the docs/ folder ]</p>
+    <div class="section-title" style="font-size:2rem;">Build Progress</div>
+    <p style="color:var(--text-faint); font-size:0.88rem; margin-bottom:1rem;">[ Add your breadboard photos here — replace the placeholder slots below with &lt;img&gt; tags pointing to your image files in the docs/ folder ]</p>
     <div class="photo-grid">
       <div class="photo-slot">📷 Full Board Overview</div>
       <div class="photo-slot">📷 Clock Module</div>
@@ -133,7 +217,7 @@
 
   <section>
     <div class="section-label">04 — Testing &amp; Results</div>
-    <div class="section-title" style="font-size:1.8rem;">Verification</div>
+    <div class="section-title" style="font-size:2rem;">Verification</div>
     <table class="test-table">
       <thead><tr><th>Test</th><th>Method</th><th>Result</th></tr></thead>
       <tbody>
