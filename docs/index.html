@@ -20,7 +20,6 @@
     background: var(--navy);
   }
 
-  /* Subtle texture overlay */
   .hero::before {
     content: '';
     position: absolute;
@@ -43,7 +42,6 @@
     pointer-events: none;
   }
 
-  /* Large decorative numeral */
   .hero-bg-num {
     position: absolute;
     right: -0.05em;
@@ -157,6 +155,31 @@
   }
   .summary-block strong { color: var(--text); font-weight: 600; }
 
+  /* ── Build photo ── */
+  .build-photo-wrap {
+    margin: 2rem 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .build-photo-wrap img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .build-photo-wrap:hover img { transform: scale(1.01); }
+
+  .build-photo-caption {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+  }
+
   /* ── Subsystem grid ── */
   .subsystem-grid {
     display: grid;
@@ -210,10 +233,100 @@
     letter-spacing: 0.1em;
   }
 
+  /* ── Video section ── */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .video-card {
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: var(--surface);
+    transition: border-color 0.2s;
+  }
+  .video-card:hover { border-color: var(--navy); }
+
+  .video-thumb {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+    cursor: pointer;
+    overflow: hidden;
+    background: #0a0e1a;
+  }
+
+  .video-thumb img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .video-thumb:hover img { transform: scale(1.03); opacity: 0.85; }
+
+  .video-play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  .video-play-btn svg {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 2px 12px rgba(0,0,0,0.7));
+    transition: transform 0.2s ease;
+  }
+  .video-thumb:hover .video-play-btn svg { transform: scale(1.1); }
+
+  /* When iframe is active, hide thumb */
+  .video-thumb.playing { padding-bottom: 56.25%; }
+  .video-thumb.playing img,
+  .video-thumb.playing .video-play-btn { display: none; }
+
+  .video-thumb iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: none;
+  }
+  .video-thumb.playing iframe { display: block; }
+
+  .video-info {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .video-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .video-title {
+    font-family: var(--display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+
   @media(max-width:768px){
     .hero { padding: 7rem 1.5rem 3rem; }
     .subsystem-card { border-right: none; border-bottom: 1px solid var(--border); }
     .subsystem-card:last-child { border-bottom: none; }
+    .video-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -239,7 +352,7 @@
     <span class="tag">74LS TTL Logic</span>
     <span class="tag">EEPROM Microcode</span>
     <span class="tag">STM32 Bus Visualizer</span>
-    <span class="tag">In Progress</span>
+    <span class="tag">Complete</span>
     <span class="tag">Variable Hz Clock</span>
   </div>
   <div class="hero-cta">
@@ -264,13 +377,14 @@
     <div class="summary-block">
       A fully functional stored-program computer built from discrete 74LS TTL logic ICs on breadboards, following Ben Eater's SAP-1 architecture under the supervision of <strong>Dr. Abdul Ofoli</strong> at UTC. The team's primary contribution is a <strong>real-time bus visualization system</strong> — an STM32 microcontroller monitoring 71 internal signals simultaneously via nine daisy-chained 74HC165 shift registers over SPI, displayed live on a 4" TFT LCD.
     </div>
-    <div class="subsystem-grid">
-      ---
-      <img src="https://github.com/user-attachments/assets/20b6e02a-6d24-4301-82a8-a23c3fe94a1b" alt="Image" width="400">
-      </div>
-      In-Progress Computer Build
-      ---
+
+    <!-- Completed build photo -->
+    <div class="build-photo-wrap">
+      <img src="completed-build.png" alt="Completed 8-bit breadboard computer with all subsystems labeled">
+      <div class="build-photo-caption">Completed Computer Build — All Subsystems Integrated</div>
     </div>
+
+    <div class="subsystem-grid">
       <div class="subsystem-card">
         <span class="subsystem-tag">Subsystem A</span>
         <h3>Clock &amp; Arithmetic</h3>
@@ -291,11 +405,81 @@
       </div>
     </div>
   </section>
+
+  <!-- VIDEO SECTION -->
+  <section>
+    <div class="section-label">03 — Demonstrations</div>
+    <div class="section-title">Videos</div>
+
+    <div class="video-grid">
+
+      <div class="video-card">
+        <div class="video-thumb" data-videoid="kjwH_u_1ULY" onclick="playVideo(this)">
+          <img src="https://img.youtube.com/vi/kjwH_u_1ULY/hqdefault.jpg" alt="Video 1 thumbnail">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(10,14,30,0.72)"/>
+              <polygon points="32,24 60,40 32,56" fill="#e8ecf4"/>
+            </svg>
+          </div>
+          <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Demo 01</div>
+          <div class="video-title">Computer in Operation</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" data-videoid="8HO_ccTmubs" onclick="playVideo(this)">
+          <img src="https://img.youtube.com/vi/8HO_ccTmubs/hqdefault.jpg" alt="Video 2 thumbnail">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(10,14,30,0.72)"/>
+              <polygon points="32,24 60,40 32,56" fill="#e8ecf4"/>
+            </svg>
+          </div>
+          <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Demo 02</div>
+          <div class="video-title">Bus Visualization System</div>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" data-videoid="Kuu_Gb-ez70" onclick="playVideo(this)">
+          <img src="https://img.youtube.com/vi/Kuu_Gb-ez70/hqdefault.jpg" alt="Video 3 thumbnail">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="rgba(10,14,30,0.72)"/>
+              <polygon points="32,24 60,40 32,56" fill="#e8ecf4"/>
+            </svg>
+          </div>
+          <iframe src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+        <div class="video-info">
+          <div class="video-label">Demo 03</div>
+          <div class="video-title">Full System Walkthrough</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
 </div>
 
 <footer>
   <span>8-Bit Breadboard Computer &nbsp;·&nbsp; ENEE 4850 SP2026 &nbsp;·&nbsp; UTC</span>
   <span>Segraves · Nix · Adams &nbsp;·&nbsp; Advisor: Dr. Abdul Ofoli</span>
 </footer>
+
+<script>
+  function playVideo(thumb) {
+    const videoId = thumb.dataset.videoid;
+    const iframe = thumb.querySelector('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+    thumb.classList.add('playing');
+  }
+</script>
 </body>
 </html>
