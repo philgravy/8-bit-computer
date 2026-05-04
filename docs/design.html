@@ -64,8 +64,6 @@
     background: var(--navy);
     transform: translateX(-3px);
   }
-  .tl-item.wip::before { background: var(--accent2); }
-  .tl-item.pending::before { background: var(--border-dk); }
 
   .tl-date {
     font-family: var(--mono);
@@ -75,8 +73,6 @@
     letter-spacing: 0.12em;
     margin-bottom: 0.3rem;
   }
-  .tl-item.wip .tl-date { color: var(--accent2); }
-  .tl-item.pending .tl-date { color: var(--text-faint); }
 
   .tl-item h4 {
     font-family: var(--display);
@@ -89,22 +85,50 @@
   .tl-item p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.7; }
 
   /* Photo grid */
-  .photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.5rem; }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 1.5rem;
+  }
   .photo-slot {
     aspect-ratio: 4/3;
     background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--text-faint);
+    overflow: hidden;
+  }
+  .photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .photo-slot img:hover { transform: scale(1.03); }
+
+  /* Full-width featured photo */
+  .photo-featured {
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-top: 1.5rem;
+  }
+  .photo-featured img {
+    width: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .photo-featured:hover img { transform: scale(1.01); }
+  .photo-caption {
     font-family: var(--mono);
     font-size: 0.65rem;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
   }
-  .photo-slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* Test table */
   .test-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 1rem; }
@@ -128,9 +152,7 @@
   .test-table tr:hover td { background: var(--surface); }
   .test-table td:first-child { color: var(--text); font-weight: 600; }
 
-  .pass      { color: #2a6e3a !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
-  .wip-status{ color: var(--accent2) !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
-  .fail      { color: #8b1a1a !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
+  .pass { color: #2a6e3a !important; font-family: var(--mono); font-size: 0.75rem; font-weight: 500; }
 </style>
 </head>
 <body>
@@ -169,48 +191,44 @@
     <div class="section-title" style="font-size:2rem;">Progress Timeline</div>
     <div class="timeline">
       <div class="tl-item">
-        <div class="tl-date">Fall 2025 — Project Kickoff</div>
+        <div class="tl-date">Fall 2025 — Complete</div>
         <h4>Team Formation &amp; Architecture Selection</h4>
         <p>Team formed, SAP-1 architecture selected as base design. Ben Eater kit bundle ordered. Subsystem responsibilities assigned: Nix (clock/ALU), Adams (RAM/PC/enclosure), Segraves (control logic/EEPROM/visualizer).</p>
       </div>
       <div class="tl-item">
-        <div class="tl-date">Jan 2026 — Hardware Build</div>
+        <div class="tl-date">Jan 2026 — Complete</div>
         <h4>Breadboard Assembly</h4>
         <p>All four base SAP-1 subsystems assembled on breadboards following Ben Eater's design. Clock module, ALU, registers, RAM, program counter, and output stage populated and wired.</p>
       </div>
       <div class="tl-item">
-        <div class="tl-date">Feb 2026 — EEPROM Programming</div>
+        <div class="tl-date">Feb 2026 — Complete</div>
         <h4>Microcode &amp; Display Decoder</h4>
         <p>AT28C16 EEPROMs programmed via T48 programmer. Display decoder binary generated in C and written to EEPROM. Microcode control words defined and verified. 7-segment output displaying decimal values confirmed.</p>
       </div>
-      <div class="tl-item wip">
-        <div class="tl-date">Mar 2026 — In Progress</div>
+      <div class="tl-item">
+        <div class="tl-date">Mar 2026 — Complete</div>
         <h4>STM32 Bus Visualizer</h4>
-        <p>STM32F411 firmware under active development. 74HC165 shift register chain assembled and SPI communication verified. TFT display driver integration in progress. 71-signal live display being finalized.</p>
+        <p>STM32F411 firmware complete. 74HC165 shift register chain assembled and SPI communication verified. TFT display driver integrated. 71-signal live display operational and confirmed each clock cycle.</p>
       </div>
-      <div class="tl-item wip">
-        <div class="tl-date">Mar–Apr 2026 — In Progress</div>
+      <div class="tl-item">
+        <div class="tl-date">Mar–Apr 2026 — Complete</div>
         <h4>Integration &amp; Debug</h4>
-        <p>Full system integration across all subsystems. Instruction set verification, timing analysis, and end-to-end program execution testing.</p>
+        <p>Full system integration across all subsystems complete. Instruction set verified, timing confirmed, and end-to-end program execution tested successfully.</p>
       </div>
-      <div class="tl-item pending">
-        <div class="tl-date">Apr 2026 — Upcoming</div>
+      <div class="tl-item">
+        <div class="tl-date">Apr 2026 — Complete</div>
         <h4>Final Demonstration</h4>
-        <p>Live demonstration of complete fetch-decode-execute cycle with real-time bus visualization. Final documentation, video walkthrough, and capstone presentation.</p>
+        <p>Live demonstration of complete fetch-decode-execute cycle with real-time bus visualization delivered. Final documentation, video walkthrough, and capstone presentation complete.</p>
       </div>
     </div>
   </section>
 
   <section>
     <div class="section-label">03 — Photos</div>
-    <div class="section-title" style="font-size:2rem;">Build Progress</div>
-    <div class="photo-grid">
-      <div class="photo-slot"><img src="fullboard.jpg" alt="Full board overview"></div>
-      <div class="photo-slot"><img src="clock.jpg" alt="Clock module"></div>
-      <div class="photo-slot"><img src="alu.jpg" alt="ALU and registers"></div>
-      <div class="photo-slot"><img src="ram.jpg" alt="RAM and program counter"></div>
-      <div class="photo-slot"><img src="output.jpg" alt="Output and 7-segment display"></div>
-      <div class="photo-slot"><img src="stm32.jpg" alt="STM32 visualizer"></div>
+    <div class="section-title" style="font-size:2rem;">Completed Build</div>
+    <div class="photo-featured">
+      <img src="completed-build.png" alt="Completed 8-bit breadboard computer with all subsystems labeled">
+      <div class="photo-caption">Completed Computer — All Subsystems Integrated &amp; Verified</div>
     </div>
   </section>
 
@@ -228,9 +246,9 @@
         <tr><td>Program counter increment</td><td>Step through clock cycles, verify PC increments 0→F</td><td class="pass">PASS</td></tr>
         <tr><td>EEPROM display decoder</td><td>Drive known binary inputs, verify correct decimal on 7-seg</td><td class="pass">PASS</td></tr>
         <tr><td>EEPROM microcode output</td><td>Step through instruction T-states, verify control word bits</td><td class="pass">PASS</td></tr>
-        <tr><td>74HC165 SPI chain readback</td><td>Drive known signals, verify STM32 reads correct 72-bit word</td><td class="wip-status">IN PROGRESS</td></tr>
-        <tr><td>TFT display rendering</td><td>Verify live signal state display updates each clock cycle</td><td class="wip-status">IN PROGRESS</td></tr>
-        <tr><td>Full program execution</td><td>Load and run ADD/SUB program, verify correct output</td><td class="wip-status">IN PROGRESS</td></tr>
+        <tr><td>74HC165 SPI chain readback</td><td>Drive known signals, verify STM32 reads correct 72-bit word</td><td class="pass">PASS</td></tr>
+        <tr><td>TFT display rendering</td><td>Verify live signal state display updates each clock cycle</td><td class="pass">PASS</td></tr>
+        <tr><td>Full program execution</td><td>Load and run ADD/SUB program, verify correct output</td><td class="pass">PASS</td></tr>
       </tbody>
     </table>
   </section>
